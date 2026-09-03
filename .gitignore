@@ -1,2 +1,9 @@
+# Arquivos de contexto
 layout.md
 stacks_I.md
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+!.env.example
