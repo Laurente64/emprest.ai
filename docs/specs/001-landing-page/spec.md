@@ -1,6 +1,6 @@
 # 001 — Landing page
 
-Status: RASCUNHO — aguardando aprovação.
+Status: APROVADA em 2026-09-21. Só desktop.
 Origem: pedido direto. Não faz parte da v1 do PRD (vibing/docs/PRD.md).
 Repositório afetado: front/ apenas. Nada em back/: o que é do front é
 do front, o que é do back é do back.
@@ -65,8 +65,5 @@ Tailwind). O layout.md dá os valores visuais; ele não decide a stack.
 - Dado real (ex.: quantos itens estão disponíveis agora).
 - O que o PRD já deixou fora da v1: reserva com data futura,
   notificação por e-mail, importação da planilha.
-
-## Decisão a confirmar antes do plano
-1. O layout.md só define larguras de desktop (1360–1440px). A landing
-   precisa funcionar em celular? Se sim, proponho uma coluna só abaixo
-   da largura de tablet.
+- Celular e tablet. A landing é só desktop, nas larguras de referência
+  do layout.md (1360–1440px).
