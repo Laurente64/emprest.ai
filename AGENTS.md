@@ -66,16 +66,19 @@ Se algo não estiver escrito em lugar nenhum, pergunte — não decida.
 Existe:
 - vibing/: PRD, ADR-001, rules/, .env.example.
 - Os projetos na Vercel e o projeto Supabase.
+- No remoto de front/ e de back/, só um commit de teste da Vercel:
+  front/ tem um index.html "Hello Vercel"; back/ tem uma function
+  Python em api/index.py (o ADR-001 §3 escolhe NestJS). As cópias
+  locais ainda não foram sincronizadas.
 
 Ainda NÃO existe:
-- Código de aplicação. back/ e front/ são repositórios sem nenhum
-  commit e sem nenhum arquivo.
+- Código de aplicação.
 - package.json, testes, schema Prisma, migrations, seed.
-- vibing/docs/specs/.
 - Workflows de CI (GitHub Actions, previstos no ADR-001 §9).
 
-Não verificado nesta máquina: Node, gerenciador de pacotes, Docker,
-Supabase CLI.
+Conferido com --version em 2026-09-21: Node 22.13.1; npm 11.12.0
+(pnpm e yarn não instalados); Docker 29.3.0, só o cliente — o daemon
+não foi conferido. Supabase CLI: não instalada.
 
 Divergência aberta: pelo .env, o projeto Supabase está em us-west-2; o
 ADR-001 §9 diz sa-east-1. Não corrija por conta própria — o ADR é meu.
