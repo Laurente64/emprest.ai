@@ -31,17 +31,22 @@ Dentro de vibing/:
 
 ## Comandos
 
-Nenhum comando foi verificado nesta máquina ainda. back/ e front/ não
-têm código nem package.json.
+Rodados pelo agente em 2026-09-23, nas specs 001 e 002. Os marcados
+com "não rodado" estão no package.json mas ninguém executou ainda.
 
-|                 | back/ | front/ |
-|-----------------|-------|--------|
-| rodar o projeto | —     | —      |
-| rodar os testes | —     | —      |
-| buildar         | —     | —      |
+|                  | back/ | front/ |
+|------------------|-------|--------|
+| rodar o projeto  | `npm run start` · `npm run start:dev` não rodado | `npm run dev` não rodado; `npm run preview` roda |
+| rodar os testes  | `npm test` (Jest) e `npm run test:e2e` (supertest) | `npm test` (Playwright, sobe o preview sozinho) |
+| buildar          | `npm run build` | `npm run build` |
+| lint             | `npm run lint` | `npm run lint` |
+| contrato da API  | `npm run openapi:emit` escreve · `npm run openapi:check` só confere | `npm run api:gen` escreve · `npm run api:check` só confere |
 
-Só entram comandos que eu já rodei nesta máquina. Até lá, se precisar
-de um comando, proponha e espere — não o trate como verificado.
+O `npm test` do front precisa do Chromium do Playwright, já instalado
+nesta máquina. O `api:check` do front precisa do back/ clonado ao lado.
+
+Só entram comandos que já rodaram nesta máquina. Se precisar de um que
+não está aqui, proponha e espere — não o trate como verificado.
 
 ## Ambiente
 
@@ -64,17 +69,24 @@ Se algo não estiver escrito em lugar nenhum, pergunte — não decida.
 ## Estado atual do projeto
 
 Existe:
-- vibing/: PRD, ADR-001, rules/, .env.example.
+- vibing/: PRD, ADR-001, rules/, specs 001 e 002.
 - Os projetos na Vercel e o projeto Supabase.
-- No remoto de front/ e de back/, só um commit de teste da Vercel:
-  front/ tem um index.html "Hello Vercel"; back/ tem uma function
-  Python em api/index.py (o ADR-001 §3 escolhe NestJS). As cópias
-  locais ainda não foram sincronizadas.
+- back/, na branch `api-saude`: NestJS com `GET /v1/health`, schema
+  Zod, configuração validada no boot, CORS por allowlist, o
+  `openapi.json` commitado e o adapter da Vercel. Testes em Jest e
+  supertest.
+- front/, na branch `landing-page`: Vite com React e Tailwind, a rota
+  `/` com a landing, o cliente gerado pelo orval e oito testes de
+  Playwright. `.env.example` com `VITE_API_URL`.
+- O `.env` e o `.env.example` do banco agora moram no back/.
+
+Nada disso está na main: são branches com PR aberto esperando merge.
 
 Ainda NÃO existe:
-- Código de aplicação.
-- package.json, testes, schema Prisma, migrations, seed.
-- Workflows de CI (GitHub Actions, previstos no ADR-001 §9).
+- Banco, Prisma, schema, migrations e seed.
+- Autenticação, multi-tenancy, CASL e RLS.
+- Workflows de CI (GitHub Actions, previstos no ADR-001 §9). Enquanto
+  não existirem, a checagem de contrato roda como comando, na mão.
 
 Conferido com --version em 2026-09-21: Node 22.13.1; npm 11.12.0
 (pnpm e yarn não instalados); Docker 29.3.0, só o cliente — o daemon
