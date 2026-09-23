@@ -52,6 +52,8 @@ em que o arquivo mora.
   usadas, sem valor.
 - CA-08 `git status` no back/ não mostra o `.env`, e um `git log` do
   repositório não tem nenhum commit com ele.
+- CA-09 O documento OpenAPI é acessível por URL no deploy. É dele que
+  o front gera o cliente e roda a checagem de contrato (spec 001).
 
 ## Fora do escopo
 - Banco, Prisma, schema, migrations e seed.
@@ -63,13 +65,15 @@ em que o arquivo mora.
 ## Decisões tomadas em 2026-09-23
 1. O `openapi.json` é servido pela API numa rota, e o front gera o
    cliente por script e commita o resultado. O artefato de CI da
-   linha 73 do ADR fica para a spec 003, porque não existe GitHub
-   Actions em nenhum dos repositórios hoje.
+   linha 73 do ADR fica para quando o CI existir: hoje não há GitHub
+   Actions em nenhum dos dois repositórios.
 2. O `.env.example` e o `.env` vão para o back/, depois do
    `.gitignore`.
 
 ## Lacuna conhecida
-Até a spec 003 existir, nada confere sozinho se o cliente gerado no
-front continua batendo com a API. É a checagem de contrato do
-ADR-001 §8, linha 167. Enquanto isso, a única proteção é o diff do PR
-quando alguém regenera o cliente.
+Enquanto não houver CI, a verificação de contrato do ADR-001 §8,
+linha 167, não roda sozinha a cada PR. Ela existe como comando do
+front/ (ver spec 001), rodado no fim de cada tarefa. A diferença é só
+quem dispara: hoje é uma pessoa, depois é o GitHub. O CI dos dois
+repositórios continua exigido pelo ADR-001, linha 195, e ainda não tem
+spec.
