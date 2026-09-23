@@ -14,14 +14,29 @@ rota pública de saúde que a landing consiga chamar.
 2. A rota é pública: não exige token.
 3. O navegador só consegue chamar a API a partir da origem do front,
    que vem de variável de ambiente (ADR-001 §7, allowlist de CORS).
-4. A API publica o documento OpenAPI gerado dos schemas Zod
-   (ADR-001 §4). É dele que o front gera o cliente.
+4. A API serve, numa rota, o documento OpenAPI gerado dos schemas Zod.
+   É dele que o front gera o cliente (ADR-001 §4, "Consumo"). Servir o
+   documento é um acréscimo ao ADR, que decidiu distribuí-lo como
+   artefato de CI e não proibiu servi-lo.
 5. A configuração é validada no boot: faltando variável obrigatória, a
    aplicação não sobe (ADR-001 §9).
 
 ## O que sai do repositório
 A function Python de teste `api/index.py`. Ela ocupa o caminho que a
 API em Node vai ocupar, e o ADR-001 §3 escolhe NestJS.
+
+## Arquivos de ambiente
+O back/ não tem `.gitignore` hoje. Nesta ordem, sem exceção:
+1. Criar o `.gitignore` do back/, ignorando `.env` e `.env.local`.
+2. Só depois mover para o back/ o `.env.example` (com `DATABASE_URL` e
+   `DIRECT_URL`, sem valor) e o `.env` local, que hoje estão em
+   vibing/.
+
+O `.env` guarda a credencial do banco de produção. Invertida a ordem,
+ele fica exposto a um `git add`. As rules continuam valendo sobre ele
+do mesmo jeito: o glob de vibing/rules/secrets.md é `**/.env*`, e o
+controle vem de o agente ser aberto em emprest.ai/, não do repositório
+em que o arquivo mora.
 
 ## Critérios de aceitação
 - CA-01 `GET /v1/health` responde 200 com corpo `{"status":"ok"}`.
@@ -35,6 +50,8 @@ API em Node vai ocupar, e o ADR-001 §3 escolhe NestJS.
 - CA-06 O deploy na Vercel responde em `/v1/health`.
 - CA-07 Nenhum segredo no repositório. O `.env.example` tem as chaves
   usadas, sem valor.
+- CA-08 `git status` no back/ não mostra o `.env`, e um `git log` do
+  repositório não tem nenhum commit com ele.
 
 ## Fora do escopo
 - Banco, Prisma, schema, migrations e seed.
@@ -43,14 +60,16 @@ API em Node vai ocupar, e o ADR-001 §3 escolhe NestJS.
   ADR-001 §10. Entram com o primeiro endpoint de negócio.
 - Qualquer código em front/. É a spec 001.
 
-## Decisões a confirmar antes do plano
-1. Como o `openapi.json` chega ao front. O ADR-001 §4 diz "artefato do
-   CI da API", o que exige montar o GitHub Actions do back/ nesta spec.
-   A alternativa é a API servir o documento numa rota e o orval ler a
-   URL do deploy — mais simples, mas é um acréscimo ao que o ADR
-   decidiu.
-2. Hoje o `.env.example` com `DATABASE_URL` e `DIRECT_URL` está em
-   vibing/, mas essas variáveis são do back/. A regra de
-   vibing/rules/secrets.md diz que o `.env.example` fica no
-   repositório que usa a variável. Movo as duas para o back/ nesta
-   spec, ou deixo onde estão?
+## Decisões tomadas em 2026-09-23
+1. O `openapi.json` é servido pela API numa rota, e o front gera o
+   cliente por script e commita o resultado. O artefato de CI da
+   linha 73 do ADR fica para a spec 003, porque não existe GitHub
+   Actions em nenhum dos repositórios hoje.
+2. O `.env.example` e o `.env` vão para o back/, depois do
+   `.gitignore`.
+
+## Lacuna conhecida
+Até a spec 003 existir, nada confere sozinho se o cliente gerado no
+front continua batendo com a API. É a checagem de contrato do
+ADR-001 §8, linha 167. Enquanto isso, a única proteção é o diff do PR
+quando alguém regenera o cliente.
