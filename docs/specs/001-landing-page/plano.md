@@ -45,7 +45,10 @@ Raleway pelo Google Fonts, pesos 400, 500, 600 e 700 (layout.md §2).
 ## Checagem de contrato
 Um comando só, com dois passos: regenerar o cliente a partir de
 `../back/openapi.json` e falhar se o resultado divergir do commitado.
-Não há download nem rota de API no meio. Ele entra nos checks de fim
+Não há download nem rota de API no meio. A geração do check sai numa
+pasta temporária, para conferir não sujar o repositório — quem escreve
+é o comando de atualização, separado. É o mesmo par que o back/ já
+tem: `openapi:emit` escreve, `openapi:check` só compara. Ele entra nos checks de fim
 de tarefa. Quando houver CI, o mesmo comando roda em cada PR
 (ADR-001 §8, linha 167), e aí o documento virá do artefato do back/,
 não do disco.

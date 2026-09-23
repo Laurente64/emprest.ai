@@ -48,9 +48,16 @@ Não existe rota servindo o documento. Um comando do back/ monta a
 aplicação em memória, gera o `openapi.json` dos schemas Zod e escreve
 o arquivo na raiz do repositório, onde ele fica commitado.
 
-Isso põe a checagem de divergência no lugar onde a mudança acontece: o
-mesmo comando, rodado de novo, não pode mudar o arquivo (CA-09). Se
-mudar, alguém alterou uma rota e não regerou o documento.
+São dois comandos, e só um escreve:
+- `openapi:emit` gera e escreve o arquivo. É o que se roda quando o
+  contrato muda de propósito.
+- `openapi:check` gera o documento em memória, compara com o arquivo
+  commitado e falha se diferirem. Não escreve nada, então conferir
+  nunca suja o repositório.
+
+Isso põe a checagem de divergência no lugar onde a mudança acontece
+(CA-09). Se o check falha, alguém alterou uma rota e não regerou o
+documento.
 
 O front lê esse arquivo de `../back/`, como o vibing/README.md já
 pressupõe. Quando houver CI, ele passa a vir do artefato, como o
