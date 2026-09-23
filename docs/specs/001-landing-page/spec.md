@@ -1,8 +1,7 @@
 # 001 — Landing page
 
-Status: ALTERAÇÃO EM RASCUNHO — aguardando aprovação.
-A v1 foi aprovada em 2026-09-21, só desktop, sem nenhuma chamada à API.
-Esta versão acrescenta o indicador de estado da API.
+Status: APROVADA em 2026-09-23, na versão com o indicador de estado da
+API. A v1, aprovada em 2026-09-21, era só desktop e não chamava a API.
 Origem: pedido direto. Não faz parte da v1 do PRD (vibing/docs/PRD.md).
 Repositório afetado: front/ apenas. A rota da API é a spec 002.
 

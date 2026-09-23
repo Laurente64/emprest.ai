@@ -4,8 +4,8 @@ Uma por vez. Cada tarefa termina com os checks de
 vibing/rules/checks.md e PARA até o próximo "pode implementar".
 
 ## T1 — Base do front/
-- Trazer a main do remoto para a cópia local e criar a branch
-  `landing-page` a partir dela.
+- Sincronizar a cópia local com o remoto e criar a branch
+  `landing-page`.
 - Gerar o scaffold `react-ts` numa pasta temporária e copiar para
   front/. Arquivos que ele cria (conferido em 2026-09-21, create-vite
   9.2.1): .gitignore, .oxlintrc.json, README.md, index.html,
@@ -30,25 +30,34 @@ vibing/rules/checks.md e PARA até o próximo "pode implementar".
 - Pronto quando: o build passa e `/` mostra uma página vazia com fundo
   `#161826`.
 
-## T4 — Testes dos critérios
+## T4 — Cliente da API
+- orval configurado; busca do `openapi.json` da API (spec 002), cliente
+  gerado e commitado junto com a cópia do documento.
+- O comando de checagem de contrato: buscar, regenerar, falhar se
+  divergir.
+- Endereço da API em variável de ambiente, e a chave no `.env.example`
+  do front/, sem valor (vibing/rules/secrets.md).
+- Pronto quando: o comando roda contra a API no ar e termina sem
+  diferença (CA-09).
+
+## T5 — Testes dos critérios
 - Playwright com Chromium, rodando contra o build servido localmente.
-- Um teste por critério, CA-01 a CA-06.
+- Um teste por critério, CA-01 a CA-08, incluindo os dois estados do
+  indicador: resposta da API e ausência de resposta.
 - Pronto quando: os testes rodam e falham onde a landing ainda não
   existe. A saída vai na resposta.
 
-## T5 — Landing
-- Conteúdo e visual da spec.
-- Pronto quando: os seis testes e o build passam.
+## T6 — Landing
+- Conteúdo, visual e indicador de estado da API, como na spec.
+- Pronto quando: os testes de CA-01 a CA-08 e o build passam.
 
-## T6 — vercel.json, push e PR
-- vercel.json com a CSP e o build do plano.
-- Push da branch `landing-page` e link do PR (não há `gh` nesta
-  máquina).
-- Se a Vercel gerar preview da branch, conferir lá os CA-01 a CA-06 e
-  se o console mostra alguma violação de CSP.
-- Merge é deploy, e é seu.
+## T7 — vercel.json, push e PR
+- vercel.json com a CSP, o `connect-src` da API e o build do plano.
+- Push da branch `landing-page` e link do PR.
+- Se a Vercel gerar preview da branch, conferir lá os critérios e se o
+  console acusa violação de CSP.
 
-## T7 — Comandos no AGENTS.md
+## T8 — Comandos no AGENTS.md
 - Registrar na tabela de Comandos de vibing/AGENTS.md os comandos do
-  front/ que rodaram nesta máquina (dev, testes, build), depois que
-  você confirmar.
+  front/ e do back/ que rodaram nesta máquina, depois que você
+  confirmar.

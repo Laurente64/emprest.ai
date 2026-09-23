@@ -1,6 +1,6 @@
 # 002 — Fundação da API e rota de saúde
 
-Status: RASCUNHO — aguardando aprovação.
+Status: APROVADA em 2026-09-23.
 Origem: pedido direto — uma rota no back que possa ser testada pela
 landing. Não faz parte da v1 do PRD (vibing/docs/PRD.md).
 Repositório afetado: back/ apenas. O consumo na página é a spec 001.
