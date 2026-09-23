@@ -1,7 +1,10 @@
 # 001 — Landing page · Plano
 
-Status: RASCUNHO — aguardando aprovação.
-Spec: spec.md (aprovada, só desktop). Tarefas: tarefas.md.
+Status: DESATUALIZADO. Ele foi escrito antes de a spec ganhar o
+indicador de estado da API e o cliente gerado com orval. Reescrevo
+plano e tarefas depois que você aprovar a alteração da spec 001 e a
+spec 002.
+Spec: spec.md. Tarefas: tarefas.md.
 
 ## O que muda em cada repositório
 

@@ -1,13 +1,14 @@
 # 001 — Landing page
 
-Status: APROVADA em 2026-09-21. Só desktop.
+Status: ALTERAÇÃO EM RASCUNHO — aguardando aprovação.
+A v1 foi aprovada em 2026-09-21, só desktop, sem nenhuma chamada à API.
+Esta versão acrescenta o indicador de estado da API.
 Origem: pedido direto. Não faz parte da v1 do PRD (vibing/docs/PRD.md).
-Repositório afetado: front/ apenas. Nada em back/: o que é do front é
-do front, o que é do back é do back.
+Repositório afetado: front/ apenas. A rota da API é a spec 002.
 
 ## Objetivo
 Uma página pública de entrada que diga o que é o EMPREST.AI, para quem
-é e quais são as regras de empréstimo.
+é, quais são as regras de empréstimo, e mostre se a API está no ar.
 
 ## Rota
 `/`, pública. É a única rota desta tarefa.
@@ -32,6 +33,14 @@ Todo texto de regra sai do PRD, sem reescrever. Nenhuma regra nova.
    - O prazo padrão de devolução é de 14 dias.
    - Quem tem item em atraso não pode pegar outro emprestado.
    - Equipamento em manutenção não aparece como disponível.
+5. Indicador de estado da API, no rodapé: ao abrir, a página consulta
+   a rota de saúde da API (spec 002) e mostra o resultado numa linha
+   discreta. Sem botão.
+
+## Como o front fala com a API
+Pelo cliente gerado com orval a partir do `openapi.json` da API
+(ADR-001 §4). Nenhum cliente HTTP escrito à mão. O endereço da API vem
+de variável de ambiente, conforme vibing/rules/secrets.md.
 
 ## Visual
 Segue o layout.md. Os pontos que a landing precisa respeitar:
@@ -39,6 +48,7 @@ Segue o layout.md. Os pontos que a landing precisa respeitar:
 - Fundo `#161826`, superfícies `#232532`, texto `#e9e9ed` (§1).
 - Acento `#2fb8ac` como linha e brilho, nunca como preenchimento
   sólido (§1).
+- Estado de falha em `#e88b8b`, o mesmo vermelho de "em atraso" (§1).
 - Nunca preto puro nem branco puro (§1).
 - Fonte única Raleway; títulos em peso 600, corpo em 400 (§2).
 - Animação só `fadeUp` curta, nada de escala ou parallax (§8).
@@ -53,15 +63,26 @@ Tailwind). O layout.md dá os valores visuais; ele não decide a stack.
 - CA-02 A página mostra a marca, o que é o sistema e os dois perfis de
   uso (itens 1 a 3 de Conteúdo).
 - CA-03 As quatro regras aparecem com o texto exato do PRD.
-- CA-04 Carregar a página não faz nenhuma requisição à API.
-- CA-05 Fundo `#161826`, acento `#2fb8ac` só em linha ou contorno, fonte
-  Raleway.
-- CA-06 Nenhum texto da página tem "!" ou emoji.
+- CA-04 Ao abrir, a página faz exatamente uma requisição à API, na rota
+  de saúde, pelo cliente gerado. Nenhuma outra.
+- CA-05 Com a API respondendo, o rodapé mostra o estado de no ar, no
+  acento `#2fb8ac`.
+- CA-06 Com a API fora do ar ou respondendo erro, o rodapé mostra o
+  estado de falha em `#e88b8b`, e o resto da página continua legível e
+  completo.
+- CA-07 Fundo `#161826`, acento `#2fb8ac` só em linha ou contorno,
+  fonte Raleway.
+- CA-08 Nenhum texto da página tem "!" ou emoji.
+
+## Dependência
+O indicador depende da spec 002. Enquanto a rota de saúde não estiver
+no ar, o CA-06 é o comportamento esperado: a landing entrega valor
+sozinha e mostra a API como fora do ar.
 
 ## Fora do escopo
 - Tela de login, autenticação e sessão — inclusive botão ou link de
   "Entrar". A landing não aponta para nenhuma outra rota.
-- Qualquer coisa em back/.
+- Qualquer código em back/. A API é a spec 002.
 - Dado real (ex.: quantos itens estão disponíveis agora).
 - O que o PRD já deixou fora da v1: reserva com data futura,
   notificação por e-mail, importação da planilha.
