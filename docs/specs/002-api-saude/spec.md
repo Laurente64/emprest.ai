@@ -14,10 +14,13 @@ rota pública de saúde que a landing consiga chamar.
 2. A rota é pública: não exige token.
 3. O navegador só consegue chamar a API a partir da origem do front,
    que vem de variável de ambiente (ADR-001 §7, allowlist de CORS).
-4. A API serve, numa rota, o documento OpenAPI gerado dos schemas Zod.
-   É dele que o front gera o cliente (ADR-001 §4, "Consumo"). Servir o
-   documento é um acréscimo ao ADR, que decidiu distribuí-lo como
-   artefato de CI e não proibiu servi-lo.
+4. Um comando do back/ gera o `openapi.json` a partir dos schemas Zod
+   e o arquivo fica commitado no repositório. É dele que o front gera
+   o cliente (ADR-001 §4, "Consumo"). Nenhuma rota de produção serve
+   esse documento: ele existe para ferramenta, e ferramenta lê
+   arquivo. O ADR previa distribuí-lo como artefato de CI; enquanto
+   não há CI, ele viaja como arquivo versionado, e a mudança de
+   contrato fica visível no diff do PR do próprio back/.
 5. A configuração é validada no boot: faltando variável obrigatória, a
    aplicação não sobe (ADR-001 §9).
 
@@ -52,8 +55,9 @@ em que o arquivo mora.
   usadas, sem valor.
 - CA-08 `git status` no back/ não mostra o `.env`, e um `git log` do
   repositório não tem nenhum commit com ele.
-- CA-09 O documento OpenAPI é acessível por URL no deploy. É dele que
-  o front gera o cliente e roda a checagem de contrato (spec 001).
+- CA-09 Rodar o comando de geração não muda o `openapi.json`
+  commitado. Se mudar, é porque o arquivo no repositório não descreve
+  mais a API que o código serve.
 
 ## Fora do escopo
 - Banco, Prisma, schema, migrations e seed.
@@ -63,10 +67,12 @@ em que o arquivo mora.
 - Qualquer código em front/. É a spec 001.
 
 ## Decisões tomadas em 2026-09-23
-1. O `openapi.json` é servido pela API numa rota, e o front gera o
-   cliente por script e commita o resultado. O artefato de CI da
-   linha 73 do ADR fica para quando o CI existir: hoje não há GitHub
-   Actions em nenhum dos dois repositórios.
+1. O `openapi.json` é um arquivo gerado por comando e commitado no
+   back/, sem nenhuma rota que o sirva. O front lê esse arquivo de
+   `../back/`, porque os três repositórios ficam lado a lado
+   (vibing/README.md). O artefato de CI da linha 73 do ADR fica para
+   quando o CI existir: hoje não há GitHub Actions em nenhum dos dois
+   repositórios.
 2. O `.env.example` e o `.env` vão para o back/, depois do
    `.gitignore`.
 

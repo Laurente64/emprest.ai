@@ -41,15 +41,15 @@ Pelo cliente gerado com orval a partir do `openapi.json` da API
 (ADR-001 §4). Nenhum cliente HTTP escrito à mão. O endereço da API vem
 de variável de ambiente, conforme vibing/rules/secrets.md.
 
-Ficam commitados no front/ dois arquivos gerados, que ninguém edita à
-mão: a cópia do `openapi.json` que serviu de base e o código
-TypeScript gerado a partir dela.
+A fonte é o `openapi.json` commitado no back/ (spec 002), lido de
+`../back/`. Não há rota de API servindo esse documento. No front/ fica
+commitado o código TypeScript gerado a partir dele, que ninguém edita
+à mão.
 
 ## Checagem de contrato
 Um comando do front/ faz, nesta ordem:
-1. busca o `openapi.json` atual da API e sobrescreve a cópia local;
-2. gera o cliente de novo a partir dessa cópia;
-3. falha se o resultado ficar diferente do que está commitado.
+1. gera o cliente de novo a partir de `../back/openapi.json`;
+2. falha se o resultado ficar diferente do que está commitado.
 
 Diferença quer dizer que a API mudou e o front ainda está na versão
 antiga. O comando não conserta nada: ele mostra o diff e falha. Quem
@@ -60,8 +60,8 @@ Quando roda: junto com testes e build, no fim de cada tarefa
 cada PR, e aí ele vira a verificação de contrato do ADR-001 §8,
 linha 167.
 
-Limite: o comando precisa da API de pé para buscar o documento. Com a
-API fora do ar ele não roda, e avisa isso — em vez de dar tudo certo.
+Limite: o comando precisa do back/ clonado ao lado do front/, que é
+como o vibing/README.md manda trabalhar. Não precisa da API no ar.
 
 ## Visual
 Segue o layout.md. Os pontos que a landing precisa respeitar:
@@ -94,8 +94,8 @@ Tailwind). O layout.md dá os valores visuais; ele não decide a stack.
 - CA-07 Fundo `#161826`, acento `#2fb8ac` só em linha ou contorno,
   fonte Raleway.
 - CA-08 Nenhum texto da página tem "!" ou emoji.
-- CA-09 Com a API no ar, o comando de checagem de contrato termina sem
-  diferença: o cliente commitado é igual ao que sai do documento atual.
+- CA-09 O comando de checagem de contrato termina sem diferença: o
+  cliente commitado é igual ao que sai do `openapi.json` do back/.
 
 ## Dependência
 O indicador depende da spec 002. Enquanto a rota de saúde não estiver

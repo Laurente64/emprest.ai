@@ -28,9 +28,11 @@ vibing/rules/checks.md e PARA até o próximo "pode implementar".
 - Pronto quando: testes cobrem CA-03 e CA-05.
 
 ## T4 — Documento OpenAPI
-- O documento é gerado dos schemas Zod e servido numa rota.
-- Pronto quando: um teste confirma que o documento traz `/v1/health` e
-  o formato da resposta (CA-04).
+- Um comando gera o `openapi.json` a partir dos schemas Zod e escreve
+  o arquivo na raiz do back/. Nenhuma rota serve esse documento.
+- O arquivo é commitado.
+- Pronto quando: o arquivo traz `/v1/health` e o formato da resposta
+  (CA-04), e rodar o comando de novo não muda nada (CA-09).
 
 ## T5 — Adapter da Vercel
 - Arquivo em `api/` criando a aplicação uma vez e guardando a
@@ -48,5 +50,5 @@ vibing/rules/checks.md e PARA até o próximo "pode implementar".
 
 ## T7 — Push e PR
 - Push da branch `api-saude` e link do PR (não há `gh` nesta máquina).
-- Depois do seu merge: conferir no deploy o CA-06 (`/v1/health`) e o
-  CA-09 (documento acessível por URL).
+- Depois do seu merge: conferir no deploy o CA-06, a rota
+  `/v1/health` respondendo.

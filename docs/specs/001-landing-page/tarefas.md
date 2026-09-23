@@ -31,14 +31,13 @@ vibing/rules/checks.md e PARA até o próximo "pode implementar".
   `#161826`.
 
 ## T4 — Cliente da API
-- orval configurado; busca do `openapi.json` da API (spec 002), cliente
-  gerado e commitado junto com a cópia do documento.
-- O comando de checagem de contrato: buscar, regenerar, falhar se
-  divergir.
+- orval configurado, lendo `../back/openapi.json`; cliente gerado e
+  commitado.
+- O comando de checagem de contrato: regenerar e falhar se divergir.
 - Endereço da API em variável de ambiente, e a chave no `.env.example`
-  do front/, sem valor (vibing/rules/secrets.md).
-- Pronto quando: o comando roda contra a API no ar e termina sem
-  diferença (CA-09).
+  do front/, sem valor (vibing/rules/secrets.md). Ele é usado em
+  tempo de execução, pela chamada à rota de saúde, não pela geração.
+- Pronto quando: o comando roda e termina sem diferença (CA-09).
 
 ## T5 — Testes dos critérios
 - Playwright com Chromium, rodando contra o build servido localmente.

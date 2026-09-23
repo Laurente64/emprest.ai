@@ -5,10 +5,11 @@ Spec: spec.md (aprovada em 2026-09-23, com o indicador de estado da
 API). Tarefas: tarefas.md.
 
 ## Ordem em relação à spec 002
-A 002 vem primeiro. O cliente gerado e a checagem de contrato (CA-09)
-precisam da API no ar para buscar o `openapi.json`. Enquanto a API não
-existir, o comportamento correto da landing é o CA-06: indicador de
-falha, com o resto da página inteiro.
+A 002 vem primeiro, porque é ela que produz o `openapi.json` commitado
+no back/. Para gerar o cliente, a API não precisa estar no ar: basta o
+arquivo existir em `../back/`. A API no ar só é necessária para o
+indicador mostrar "no ar" (CA-05); sem ela, o comportamento correto é
+o CA-06, com o resto da página inteiro.
 
 ## O que muda em cada repositório
 - front/: tudo desta spec.
@@ -42,10 +43,12 @@ shadcn/ui, Vitest, Sentry.
 Raleway pelo Google Fonts, pesos 400, 500, 600 e 700 (layout.md §2).
 
 ## Checagem de contrato
-Um comando só, com três passos: buscar o `openapi.json` da API,
-regenerar o cliente e falhar se o resultado divergir do commitado.
-Ele entra nos checks de fim de tarefa. Quando houver CI, o mesmo
-comando roda em cada PR (ADR-001 §8, linha 167).
+Um comando só, com dois passos: regenerar o cliente a partir de
+`../back/openapi.json` e falhar se o resultado divergir do commitado.
+Não há download nem rota de API no meio. Ele entra nos checks de fim
+de tarefa. Quando houver CI, o mesmo comando roda em cada PR
+(ADR-001 §8, linha 167), e aí o documento virá do artefato do back/,
+não do disco.
 
 ## Cabeçalhos e build na Vercel (vercel.json)
 - CSP restritiva, sem `unsafe-inline` (ADR-001 §10):

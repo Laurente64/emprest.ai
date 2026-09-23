@@ -43,6 +43,19 @@ auditoria.
 - Os valores no painel da Vercel são seus: a restrictions.md me proíbe
   de mexer lá.
 
+## O documento OpenAPI
+Não existe rota servindo o documento. Um comando do back/ monta a
+aplicação em memória, gera o `openapi.json` dos schemas Zod e escreve
+o arquivo na raiz do repositório, onde ele fica commitado.
+
+Isso põe a checagem de divergência no lugar onde a mudança acontece: o
+mesmo comando, rodado de novo, não pode mudar o arquivo (CA-09). Se
+mudar, alguém alterou uma rota e não regerou o documento.
+
+O front lê esse arquivo de `../back/`, como o vibing/README.md já
+pressupõe. Quando houver CI, ele passa a vir do artefato, como o
+ADR-001 §4 decidiu.
+
 ## Como isso roda na Vercel
 O Nest não roda como processo na Vercel. O padrão é um arquivo em
 `api/` que cria a aplicação uma vez, guarda a instância fora do
