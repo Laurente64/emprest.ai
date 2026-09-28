@@ -28,6 +28,8 @@ Dentro de vibing/:
 - rules/ — como se trabalha aqui. Ver Procedimentos, abaixo.
 - layout.md — especificação de layout das telas. Arquivo de contexto,
   fora do git (.gitignore).
+- handoffs/AAAA-MM-DD-nome-curto.md — o que uma sessão passa para a
+  próxima. Fora do git (.gitignore). Ver rules/handoff.md.
 
 ## Comandos
 
@@ -104,6 +106,7 @@ As regras estão em vibing/rules/. Cada uma diz quando vale.
   ou policy: rules/migration.md.
 - Antes de criar ou usar variável de ambiente, instanciar o client do
   banco ou escrever código que lê configuração: rules/secrets.md.
+- Quando eu pedir para salvar ou retomar um handoff: rules/handoff.md.
 
 Ordem de uma funcionalidade:
 1. Rascunhe a spec em vibing/docs/specs/<NNN-funcionalidade>/, a partir
