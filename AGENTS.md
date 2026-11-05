@@ -26,6 +26,8 @@ Dentro de vibing/:
 - docs/specs/<NNN-funcionalidade>/ — spec, plano e tarefas de cada
   feature. Você rascunha os três; nada vale antes de eu aprovar.
 - rules/ — como se trabalha aqui. Ver Procedimentos, abaixo.
+- skills/<nome>/SKILL.md — como escrever um tipo de código. Ver
+  Procedimentos, abaixo.
 - agents/<nome>.md — instruções de um subagente. Ver Procedimentos,
   abaixo.
 - layout.md — especificação de layout das telas. Arquivo de contexto,
@@ -109,6 +111,13 @@ As regras estão em vibing/rules/. Cada uma diz quando vale.
 - Antes de criar ou usar variável de ambiente, instanciar o client do
   banco ou escrever código que lê configuração: rules/secrets.md.
 - Quando eu pedir para salvar ou retomar um handoff: rules/handoff.md.
+
+As skills estão em vibing/skills/. Leia a skill antes da tarefa que ela
+cobre. Se ela conflitar com um ADR ou uma spec, PARE e avise, como
+com qualquer regra (rules/restrictions.md).
+
+- Antes de escrever, alterar ou revisar arquivo .ts ou .tsx em back/ ou
+  front/: skills/typescript/SKILL.md.
 
 Os subagentes estão em vibing/agents/. O Claude Code não os carrega de
 lá, então eles não existem como tipo de agente. Para usar um, dispare um
