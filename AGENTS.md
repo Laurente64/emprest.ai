@@ -47,6 +47,7 @@ com "não rodado" estão no package.json mas ninguém executou ainda.
 | buildar          | `npm run build` | `npm run build` |
 | lint             | `npm run lint` | `npm run lint` |
 | contrato da API  | `npm run openapi:emit` escreve · `npm run openapi:check` só confere | `npm run api:gen` escreve · `npm run api:check` só confere |
+| gerar migration  | `npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script` (rodado em 2026-11-05, na spec 003; parte do banco vazio, então só serviu para a primeira migration) | não se aplica |
 
 O `npm test` do front precisa do Chromium do Playwright, já instalado
 nesta máquina. O `api:check` do front precisa do back/ clonado ao lado.
@@ -75,20 +76,22 @@ Se algo não estiver escrito em lugar nenhum, pergunte — não decida.
 ## Estado atual do projeto
 
 Existe na main:
-- vibing/: PRD, ADR-001, ADR-002, rules/, skills/, agents/ e specs 001
-  e 002.
+- vibing/: PRD, ADR-001, ADR-002, rules/, skills/, agents/ e specs 001,
+  002 e 003.
 - Os projetos na Vercel e o projeto Supabase.
 - back/: NestJS com `GET /v1/health`, schema Zod, configuração validada
   no boot, CORS por allowlist, o `openapi.json` commitado e o adapter da
-  Vercel. Testes em Jest e supertest.
+  Vercel. Prisma com `schema.prisma`, a migration do modelo de dados
+  (tabelas com `tenant_id`, RLS e policies) e o seed. Testes em Jest,
+  supertest e Testcontainers.
 - front/: Vite com React e Tailwind, a rota `/` com a landing, o cliente
   gerado pelo orval, a CSP no `vercel.json` e oito testes de Playwright.
   `.env.example` com `VITE_API_URL`.
 - O `.env` e o `.env.example` do banco moram no back/.
 
 Ainda NÃO existe na main:
-- Banco, Prisma, schema, migrations e seed.
-- Autenticação, multi-tenancy, CASL e RLS.
+- Código da API que use o banco: nenhum módulo importa o Prisma ainda.
+- Autenticação, guards, CASL e o contexto de tenant no request.
 - Workflows de CI (GitHub Actions, previstos no ADR-001 §9). Enquanto
   não existirem, a checagem de contrato roda como comando, na mão.
 
