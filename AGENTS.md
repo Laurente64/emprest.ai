@@ -116,9 +116,8 @@ subagente general-purpose, mande ler o arquivo e seguir o que está nele,
 e passe as entradas que ele pede. O prompt é só isso: não copie nem
 resuma o arquivo, nem acrescente lembretes ou pistas do que procurar.
 
-- Depois de concluir todas as tarefas de uma spec e antes de declará-la
-  pronta, ou quando eu pedir verificação, conferência de CA ou revisão
-  contra a spec: agents/verificador-spec.md.
+- No passo 4 da ordem abaixo, ou quando eu pedir verificação, conferência
+  de CA ou revisão contra a spec: agents/verificador-spec.md.
 
 Ordem de uma funcionalidade:
 1. Rascunhe a spec em vibing/docs/specs/<NNN-funcionalidade>/, a partir
@@ -126,3 +125,7 @@ Ordem de uma funcionalidade:
    aprovar.
 2. Escreva o plano e as tarefas. PARE até eu aprovar.
 3. Execute UMA tarefa, rode os checks, mostre o resultado e PARE.
+4. Depois da última tarefa, antes de declarar a spec pronta, delegue a
+   verificação a agents/verificador-spec.md. A spec só está pronta com
+   "Veredito: PRONTA". Qualquer outro resultado volta para as tarefas, e
+   quem corrige é o agente principal, nunca o verificador.
