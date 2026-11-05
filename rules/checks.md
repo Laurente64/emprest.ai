@@ -27,6 +27,8 @@ Sempre que você for dizer "pronto", "implementado" ou "funcionando".
    (vibing/, back/ e front/ são repositórios separados). Só podem
    aparecer arquivos do escopo da tarefa.
 5. Diga qual critério de aceitação (CA-xx) da spec esta tarefa atende.
+   O teste que prova um CA cita o ID no nome, por exemplo
+   `it('CA-01 responde 200')`. Comentário não conta.
 
 ## Verificação
 Pronto = testes e build terminaram sem falha, a migration aplicada (se
