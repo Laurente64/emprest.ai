@@ -26,6 +26,8 @@ Dentro de vibing/:
 - docs/specs/<NNN-funcionalidade>/ — spec, plano e tarefas de cada
   feature. Você rascunha os três; nada vale antes de eu aprovar.
 - rules/ — como se trabalha aqui. Ver Procedimentos, abaixo.
+- skills/<nome>/SKILL.md — como escrever um tipo de código. Ver
+  Procedimentos, abaixo.
 - agents/<nome>.md — instruções de um subagente. Ver Procedimentos,
   abaixo.
 - layout.md — especificação de layout das telas. Arquivo de contexto,
@@ -62,8 +64,8 @@ não está aqui, proponha e espere — não o trate como verificado.
   remoto. Push publica. main é produção.
 - Git: você trabalha em branch, faz push da branch e abre PR. O merge é
   meu.
-- Configuração vem de variável de ambiente. Ver vibing/.env.example e
-  vibing/rules/secrets.md.
+- Configuração vem de variável de ambiente. Ver o `.env.example` de cada
+  repositório e vibing/rules/secrets.md.
 
 ## Precedência
 
@@ -72,21 +74,19 @@ Se algo não estiver escrito em lugar nenhum, pergunte — não decida.
 
 ## Estado atual do projeto
 
-Existe:
-- vibing/: PRD, ADR-001, rules/, specs 001 e 002.
+Existe na main:
+- vibing/: PRD, ADR-001, ADR-002, rules/, skills/, agents/ e specs 001
+  e 002.
 - Os projetos na Vercel e o projeto Supabase.
-- back/, na branch `api-saude`: NestJS com `GET /v1/health`, schema
-  Zod, configuração validada no boot, CORS por allowlist, o
-  `openapi.json` commitado e o adapter da Vercel. Testes em Jest e
-  supertest.
-- front/, na branch `landing-page`: Vite com React e Tailwind, a rota
-  `/` com a landing, o cliente gerado pelo orval e oito testes de
-  Playwright. `.env.example` com `VITE_API_URL`.
-- O `.env` e o `.env.example` do banco agora moram no back/.
+- back/: NestJS com `GET /v1/health`, schema Zod, configuração validada
+  no boot, CORS por allowlist, o `openapi.json` commitado e o adapter da
+  Vercel. Testes em Jest e supertest.
+- front/: Vite com React e Tailwind, a rota `/` com a landing, o cliente
+  gerado pelo orval, a CSP no `vercel.json` e oito testes de Playwright.
+  `.env.example` com `VITE_API_URL`.
+- O `.env` e o `.env.example` do banco moram no back/.
 
-Nada disso está na main: são branches com PR aberto esperando merge.
-
-Ainda NÃO existe:
+Ainda NÃO existe na main:
 - Banco, Prisma, schema, migrations e seed.
 - Autenticação, multi-tenancy, CASL e RLS.
 - Workflows de CI (GitHub Actions, previstos no ADR-001 §9). Enquanto
@@ -109,6 +109,13 @@ As regras estão em vibing/rules/. Cada uma diz quando vale.
 - Antes de criar ou usar variável de ambiente, instanciar o client do
   banco ou escrever código que lê configuração: rules/secrets.md.
 - Quando eu pedir para salvar ou retomar um handoff: rules/handoff.md.
+
+As skills estão em vibing/skills/. Leia a skill antes da tarefa que ela
+cobre. Se ela conflitar com um ADR ou uma spec, PARE e avise, como
+com qualquer regra (rules/restrictions.md).
+
+- Antes de escrever, alterar ou revisar arquivo .ts ou .tsx em back/ ou
+  front/: skills/typescript/SKILL.md.
 
 Os subagentes estão em vibing/agents/. O Claude Code não os carrega de
 lá, então eles não existem como tipo de agente. Para usar um, dispare um
