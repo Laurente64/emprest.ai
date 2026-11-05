@@ -43,7 +43,7 @@ com "não rodado" estão no package.json mas ninguém executou ainda.
 |                  | back/ | front/ |
 |------------------|-------|--------|
 | rodar o projeto  | `npm run start` · `npm run start:dev` não rodado | `npm run dev` não rodado; `npm run preview` roda |
-| rodar os testes  | `npm test` (Jest) e `npm run test:e2e` (supertest) | `npm test` (Playwright, sobe o preview sozinho) |
+| rodar os testes  | `npm test` (Jest), `npm run test:e2e` (supertest) e `npm run test:db` (Testcontainers; rodado em 2026-11-05, na spec 003; precisa do Docker ligado) | `npm test` (Playwright, sobe o preview sozinho) |
 | buildar          | `npm run build` | `npm run build` |
 | lint             | `npm run lint` | `npm run lint` |
 | contrato da API  | `npm run openapi:emit` escreve · `npm run openapi:check` só confere | `npm run api:gen` escreve · `npm run api:check` só confere |
