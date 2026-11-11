@@ -87,3 +87,12 @@ de cada tarefa fica registrado no fim.
     linhas nos três.
   - Pendente, do usuário: `npm run imagens:enviar` (a trava exige o
     terminal dele) e o login do professor pela Vercel depois do merge.
+- T5 (2026-11-11) — verificação.
+  - Rodada 1 (back 4eafb0e): NÃO PRONTA. CA-06 reprovado: "confirmada"
+    era constante da imitação do Auth, e o e-mail era comparado com a
+    constante do próprio código; nenhum teste quebraria sem o
+    `email_confirm`. CA-05 ambíguo: `SEED_TESTE_EMAIL=""` derrubava o
+    seed. Correção (agente principal), back 4f61505: confirmação passada
+    pelo seed e conferida no pedido real do `supabase-js`; e-mail do
+    briefing escrito no teste; variável vazia conta como ausente (spec
+    emendada); testes que executam a recusa do envio.

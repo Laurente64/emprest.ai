@@ -3,7 +3,8 @@
 Status: APROVADA em 2026-11-11 pelo agente, por delegação do usuário
 (ver spec 004, "Aprovação"). As decisões marcadas "usuário" foram
 respondidas por ele em 2026-11-10; as do agente estão em "Para o usuário
-confirmar".
+confirmar". Emendada em 2026-11-11 depois da rodada 1 do verificador
+(item 10 e CA-05): verificacoes/2026-11-11-rodada-1.md.
 Origem: briefing "dados iniciais" da prática (pedido, não spec) e a
 lista de equipamentos do enunciado. PRD v1, item 2, precisa de
 equipamentos para existir.
@@ -59,6 +60,8 @@ usuário. Popular de novo não duplica nada.
 10. Faltando `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` ou
     `SEED_PROFESSOR_SENHA`, ou com `SEED_TESTE_EMAIL` sem
     `SEED_TESTE_SENHA`, o seed para antes de escrever qualquer coisa.
+    Variável vazia (`""`, como no `.env.example`) conta como ausente
+    (emenda de 2026-11-11, rodada 1 do verificador).
 11. Variáveis: ver a tabela da spec 004. As do seed e do script ficam só
     no `back/.env` e no `.env.example`.
 
@@ -149,7 +152,8 @@ administração do Auth é substituída por uma imitação que grava em
   existe em back/prisma/dados/imagens/.
 - CA-05 Rodar o seed duas vezes com a conta de teste configurada deixa 1
   tenant, 12 equipamentos, 2 memberships e 0 empréstimos, e cria cada
-  conta uma vez só. Sem `SEED_TESTE_EMAIL`, deixa 1 membership.
+  conta uma vez só. Sem `SEED_TESTE_EMAIL`, ausente ou vazia, deixa 1
+  membership.
 - CA-06 A conta do professor é criada com o e-mail do briefing,
   confirmada, com `app_metadata.tenant_id` do `suporte_ti` (somado ao
   `app_metadata` existente), membership `colaborador` "Marcelo Grilo" e
