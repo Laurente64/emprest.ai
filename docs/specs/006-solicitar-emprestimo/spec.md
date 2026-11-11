@@ -132,6 +132,8 @@ aparece na tela.
       atalho é "Ver meus empréstimos";
     - o crédito fica abaixo da grade e abre em nova aba;
     - item sem `imagemUrl` mostra o espaço da foto com "Sem foto";
+    - na linha de "Meus empréstimos" a foto tem 96 px de largura (emenda
+      de 2026-11-11, depois da rodada 3);
     - a tela do catálogo também busca "meus empréstimos", para limite,
       atraso e a data dos itens com a pessoa; a barra de 3 traços do
       layout.md §5.3 não entra.

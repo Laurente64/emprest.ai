@@ -73,3 +73,18 @@ de cada tarefa fica registrado no fim.
     inclusive as correções da rodada 1. A mensagem do commit diz que é
     erro plantado; a reprovação veio dos testes vermelhos, não da
     mensagem. Desfeito em back 9ec9d0e (git revert).
+  - Rodada 3 (back 9ec9d0e, front 30dfcb0): PRONTA. O arquivo da rodada
+    foi salvo primeiro como resumo, contra o passo 4 do AGENTS.md; em
+    2026-11-11 foi trocado pela resposta inteira do verificador.
+- Depois da rodada 3, SEM rodada nova do verificador (pendência):
+  - back e3addb6 (em spec-004-login, levado por merge a 005 e 006): o
+    build passa a rodar `prisma generate` antes do `nest build`, e o
+    `schema.prisma` ganha `binaryTargets` com `rhel-openssl-3.0.x`. O
+    build da Vercel falhava (TS2339 em `imagePath`) porque o Prisma
+    Client não era gerado. Não é migration: não muda o banco.
+  - front 62d9bc4 (branch ajuste-foto-meus-emprestimos): a foto da linha
+    de "Meus empréstimos" ocupava a linha inteira (876 px), porque o
+    componente aplicava `w-full` sempre. A largura de 96 px (`w-24`) foi
+    decisão do subagente na T3 e não estava na spec: entra como emenda
+    no item 17. O teste do CA-19 passa a medir a foto. Autorizado pelo
+    usuário em 2026-11-11.

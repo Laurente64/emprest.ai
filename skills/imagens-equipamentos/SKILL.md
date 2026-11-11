@@ -25,7 +25,7 @@ back/prisma/dados/imagens/: os arquivos `.jpg`, o `creditos.json` e o
 | Créditos | código e teste | O `creditos.json` guarda, por equipamento: id e página no Pixabay, autor, licença com link, busca usada e sha256. Um teste confere os 12, completos. |
 | Armazenamento | código | Bucket público `equipamentos` no Supabase Storage. Caminho fixo `<patrimonio>.jpg`, envio com upsert: repetir substitui, não duplica. O seed grava o caminho em `equipments.image_path`. |
 | Produção | código | O envio exige terminal interativo e o ref do projeto digitado. O shell do agente não é interativo. Ver "Limite conhecido". |
-| Segredos e dependências | regra e revisão | `PIXABAY_API_KEY` e `SUPABASE_SERVICE_ROLE_KEY` só no `back/.env` (fora do git). `sharp` é dependência de desenvolvimento, aprovada no ADR-001 §12, e não entra no bundle da API. |
+| Segredos e dependências | regra e revisão | `PIXABAY_API_KEY` e `SUPABASE_SERVICE_ROLE_KEY` só no `back/.env` (fora do git). `sharp` é dependência de desenvolvimento, aprovada no ADR-003, e não entra no bundle da API. |
 | Crédito na tela | teste do front | O catálogo mostra "Fotos: Pixabay" com link para https://pixabay.com/ (spec 006). A API pede que o usuário veja de onde vêm as imagens. |
 
 ## Procedimento

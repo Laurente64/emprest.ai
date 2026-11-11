@@ -47,7 +47,7 @@ Conta existente é encontrada por e-mail na lista de usuários do Auth
 | `scripts/imagens/preparar.ts` | CLI `npm run imagens:preparar`. |
 | `scripts/imagens/enviar.ts` | CLI `npm run imagens:enviar`: exige terminal interativo e o ref do projeto digitado; cria o bucket público se faltar; envia com upsert; confere a URL pública. Fala com o Storage por `fetch`, sem biblioteca nova. |
 
-- `sharp` como devDependency, versão fixa (ADR-001 §12).
+- `sharp` como devDependency, versão fixa (ADR-003).
 - `scripts/` fora do build (`tsconfig.build.json`), como `prisma/`.
 - O Jest unitário passa a olhar `src/`, `scripts/` e `prisma/`.
 - Revisão visual: feita pelo agente nesta noite, por delegação, e
