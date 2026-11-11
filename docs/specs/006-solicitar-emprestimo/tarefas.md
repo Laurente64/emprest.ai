@@ -51,3 +51,17 @@ de cada tarefa fica registrado no fim.
   espera o título "Catálogo" no lugar de "Bem-vindo"; helpers em
   `e2e/apoio.ts`. A lista dos 12 está copiada no teste: ela não
   acompanha mudanças no `equipamentos.json`.
+- Ajustes antes da verificação (back): 83d9377 (`npm run lint` cobre
+  `scripts/` e `prisma/`, observação da rodada 2 da 005), e1729eb
+  (`.gitattributes` com `openapi.json` em LF: com `core.autocrlf`, o
+  checkout no Windows punha CRLF e o `openapi:check` acusava divergência
+  sem mudança de contrato), 4c28ad0 (documento OpenAPI 3.1: o Zod descreve
+  nulo como `type: [..., "null"]`, inválido em 3.0; o orval avisava e
+  gerava tipos sem `null`). Front 30dfcb0: cliente regerado.
+- T4 (2026-11-11) — verificação.
+  - Rodada 1 (back 4c28ad0, front 30dfcb0): NÃO PRONTA. CA-10: o 404 saía
+    com `/problemas/equipamento-nao-encontrado`, e o item 2.1 exige
+    `about:blank` (a spec vale; o código mudou). CA-01: o teste não
+    conferia a categoria. CA-04: "não grava nada" não olhava a
+    `audit_log`. Correção (agente principal), back 241a7ce; o CA-09 ganhou
+    o caso `emAtraso` verdadeiro.
