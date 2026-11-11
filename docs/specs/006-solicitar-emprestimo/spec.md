@@ -4,6 +4,7 @@ Status: APROVADA em 2026-11-11 pelo agente, por delegação do usuário
 (ver spec 004, "Aprovação"). As decisões marcadas "usuário" foram
 respondidas por ele em 2026-11-10; as do agente estão em "Para o usuário
 confirmar".
+PRONTA em 2026-11-11: verificacoes/2026-11-11-rodada-3.md (back 9ec9d0e, front 30dfcb0).
 Origem: briefing "solicitar empréstimo" da prática (pedido, não spec);
 PRD v1, itens 2 e 3, e "Regras que Operações já decidiu".
 Repositórios afetados: back/ e front/.

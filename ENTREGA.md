@@ -12,8 +12,7 @@ código dizem `back` ou `front`.
 - Repositório de documentação e decisões: https://github.com/Laurente64/emprest.ai
 - API (back): https://github.com/Laurente64/emprest.ai-back
 - SPA (front): https://github.com/Laurente64/emprest.ai-front
-- Produção (Vercel): front — PREENCHER COM O ENDEREÇO DO PROJETO FRONT ·
-  API — https://emprest-ai-back-sigma.vercel.app
+- Produção (Vercel): API — https://emprest-ai-back-sigma.vercel.app · front — endereço do projeto front na Vercel (preencher antes da tag)
 
 ## Quem fez o quê nesta entrega
 Fui eu (aluno) quem respondeu às perguntas de negócio e de conflito. O
@@ -157,13 +156,16 @@ limitação; o ADR fica para quando a escolha passar a custar algo.
   ordem da spec) e cada uma fica em um arquivo.
 
 ## 6. O verificador em ação
-PREENCHER AO FIM: rodadas da 005 e da 006 e a prova com erro plantado.
+Tabelas finais: specs/00X/verificacoes/ (a última rodada de cada spec).
 
 - **004, rodada 1 (NÃO PRONTA).** CA-02: um token RS256 de chave RSA com
   o mesmo `kid` voltava 500. Causa: exceção do `getClaims` fora do tipo
   que o guard converte em 401. Correção: back b3733ce, front bfe7458.
   Arquivo: specs/004-login/verificacoes/2026-11-11-rodada-1.md.
 - **004, rodada 2 (PRONTA).** specs/004-login/verificacoes/2026-11-11-rodada-2.md.
+- **005, rodada 1 (NÃO PRONTA).** CA-06: "confirmada" era constante da imitação e o e-mail vinha da constante do código; CA-05: variável vazia derrubava o seed. Correção back 4f61505. **Rodada 2: PRONTA** (005/verificacoes/).
+- **006, rodada 1 (NÃO PRONTA).** CA-10: 404 com type diferente de `about:blank` (a spec vale; código mudou); CA-01 sem conferir categoria; CA-04 sem olhar a audit_log. Correção back 241a7ce.
+- **Prova com erro plantado.** back 7bcb40a: limite padrão 3 → 5 (o número do briefing). Rodada 2 (006/verificacoes/2026-11-11-rodada-2.md): NÃO PRONTA, CA-06, CA-08 e CA-11 REPROVADOS pela causa certa (regras.ts:4), mais 3 testes vermelhos. Erro desfeito em back 9ec9d0e (git revert). Rodada 3: **PRONTA** (rodada-3.md).
 
 ## 7. Uma regra minha que esta prática pôs à prova
 **rules/checks.md, "teste nunca toca produção".** Os testes unitários do
