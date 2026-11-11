@@ -33,7 +33,8 @@ de cada tarefa fica registrado no fim.
   verificacoes/. Push e link do PR.
 
 ## Registro
-- T1 (2026-11-11) — back `spec-005-dados-iniciais` 9cf8015. `npm test` 17
+- T1 (2026-11-11) — back `spec-005-dados-iniciais` 9cf8015 (8a0f66c depois
+  do rebase sobre a correção da 004). `npm test` 17
   passed (CA-08 a CA-13); build e lint sem erro. Execução da skill:
   - Primeira rodada: nenhuma foto passou, porque o script só aceitava
     download de `cdn.pixabay.com` e o `largeImageURL` vem de
@@ -52,11 +53,12 @@ de cada tarefa fica registrado no fim.
     do teclado, "WEB CAMERA" na lente da webcam, "18-55 OIS" na lente da
     câmera). A regra foi escrita em references/revisao-visual.md antes da
     aprovação. É decisão do agente: o usuário confere.
-- T2 (2026-11-11) — back d70fabd. `npm run test:db` 105 passed (CA-01).
+- T2 (2026-11-11) — back d70fabd (996e724 depois do rebase; o
+  `migration.sql` é o mesmo, checksum igual). `npm run test:db` 105 passed (CA-01).
   Comando de geração: `npx prisma migrate diff --from-schema-datamodel
   <schema da main> --to-schema-datamodel prisma/schema.prisma --script`;
   saída igual ao DDL do item 4.
-- T3 (2026-11-11) — back 405edb2. `npm run test:db` 112 passed (CA-02 a
+- T3 (2026-11-11) — back 405edb2 (4eafb0e depois do rebase). `npm run test:db` 112 passed (CA-02 a
   CA-07 e o CA-12 da spec 003 chamando a função do seed); `npm test` 17
   passed; build e lint sem erro; `openapi:check` em dia.
 - T4 (2026-11-11) — produção, rodada pelo agente com autorização do
