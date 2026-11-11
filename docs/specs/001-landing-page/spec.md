@@ -2,6 +2,8 @@
 
 Status: APROVADA em 2026-09-23, na versão com o indicador de estado da
 API. A v1, aprovada em 2026-09-21, era só desktop e não chamava a API.
+Emendada em 2026-11-11 pela spec 004 (D-04): a landing ganha o link
+"Entrar". Mudam o CA-01 e o "Fora do escopo".
 Origem: pedido direto. Não faz parte da v1 do PRD (vibing/docs/PRD.md).
 Repositório afetado: front/ apenas. A rota da API é a spec 002.
 
@@ -80,7 +82,9 @@ A implementação segue o ADR-001 §2 (React, Vite, React Router,
 Tailwind). O layout.md dá os valores visuais; ele não decide a stack.
 
 ## Critérios de aceitação
-- CA-01 Abrir `/` sem sessão mostra a página. Nada pede login.
+- CA-01 Abrir `/` sem sessão mostra a página. Nada pede login para
+  abrir; o único caminho para o login é o link "Entrar" (emenda da spec
+  004).
 - CA-02 A página mostra a marca, o que é o sistema e os dois perfis de
   uso (itens 1 a 3 de Conteúdo).
 - CA-03 As quatro regras aparecem com o texto exato do PRD.
@@ -103,8 +107,8 @@ no ar, o CA-06 é o comportamento esperado: a landing entrega valor
 sozinha e mostra a API como fora do ar.
 
 ## Fora do escopo
-- Tela de login, autenticação e sessão — inclusive botão ou link de
-  "Entrar". A landing não aponta para nenhuma outra rota.
+- Tela de login, autenticação e sessão (spec 004). Desde a emenda de
+  2026-11-11, a landing aponta para `/entrar` e para nenhuma outra rota.
 - Qualquer código em back/. A API é a spec 002.
 - Dado real (ex.: quantos itens estão disponíveis agora).
 - O que o PRD já deixou fora da v1: reserva com data futura,
