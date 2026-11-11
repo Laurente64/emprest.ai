@@ -2,7 +2,8 @@
 
 Status: APROVADA em 2026-11-11 pelo agente, por delegação do usuário
 (ver "Aprovação"). As decisões do agente estão em "Para o usuário
-confirmar".
+confirmar". Emendada em 2026-11-11 depois da rodada 1 do verificador
+(itens 3, 5, 7, 8 e 13; CA-02 e CA-14): verificacoes/2026-11-11-rodada-1.md.
 Origem: PRD v1, item 1 ("Login. Cada pessoa vê os próprios
 empréstimos."). Pré-requisito das specs 005 e 006: o briefing de dados
 iniciais exige que o professor "entra pelo login do sistema". O
@@ -40,18 +41,26 @@ administrador (ADR-001 §7, cadastro fechado): não há cadastro nesta spec.
 2. O login é feito pelo `supabase-js` no navegador, que guarda e renova
    a sessão (ADR-001 §7).
 3. Credenciais recusadas: "E-mail ou senha incorretos.", sem dizer qual
-   dos dois. A pessoa continua em `/entrar`.
+   dos dois. A pessoa continua em `/entrar`. Outra falha do Auth (rede,
+   indisponibilidade): "Não foi possível entrar agora. Tente de novo."
+   (emenda de 2026-11-11).
 4. Login aceito: vai para `/app`.
 5. `/app` e o que estiver abaixo dele exigem sessão. Sem sessão, vai
-   para `/entrar`. Com sessão, `/entrar` vai para `/app`.
+   para `/entrar`. Com sessão, `/entrar` vai para `/app`. O `vercel.json`
+   reescreve toda rota para o `index.html` (SPA): sem isso, abrir
+   `/entrar` ou `/app` direto na Vercel dá 404 (emenda de 2026-11-11).
 6. A área logada tem a barra de topo do layout.md §6: marca, papel,
    iniciais, nome e "Sair". Nome e papel vêm da API (`GET /v1/eu`), não
    do token. Nesta spec a barra ainda não tem abas e o conteúdo é só
    "Bem-vindo, <nome>."; as abas e o catálogo entram na spec 006.
-7. "Sair" encerra a sessão no `supabase-js` e volta para `/entrar`.
+7. "Sair" encerra a sessão deste aparelho no `supabase-js` (escopo
+   `local`; o padrão global derrubaria a pessoa em todos os aparelhos) e
+   volta para `/entrar` (emenda de 2026-11-11).
 8. Conta válida no Auth mas sem vínculo com o tenant (API responde 403):
    a área logada mostra "Sua conta ainda não tem acesso ao EMPREST.AI.
-   Fale com Operações." e o botão "Sair".
+   Fale com Operações." e o botão "Sair". Outra falha de `/v1/eu`: "Não
+   foi possível carregar os seus dados. Tente de novo." e "Sair" (emenda
+   de 2026-11-11).
 9. A API respondendo 401 numa tela logada (sessão revogada ou renovação
    falhou): o front encerra a sessão e vai para `/entrar`.
 10. A landing (`/`) ganha um link "Entrar" para `/entrar`. Ela continua
@@ -66,8 +75,11 @@ administrador (ADR-001 §7, cadastro fechado): não há cadastro nesta spec.
     exceto `GET /v1/health`, que continua pública (spec 002).
 13. O token só é aceito se: o algoritmo for assimétrico (ES256 ou RS256)
     com `kid`; o `kid` estiver na JWKS do projeto (ADR-001 §7), guardada
-    em cache por 10 minutos e buscada de novo uma vez quando o `kid` não
-    aparece; a assinatura bater com essa chave; não estiver expirado;
+    em cache por 10 minutos e buscada de novo quando o `kid` não aparece,
+    no máximo uma vez a cada 30 segundos (sem esse teto, cada token com
+    `kid` inventado seria uma chamada à JWKS; depois de uma rotação de
+    chave, o `kid` novo pode esperar até 30 s; emenda de 2026-11-11); o
+    `alg` do token ser o da chave; a assinatura bater com essa chave; não estiver expirado;
     `aud` for `authenticated`; e `iss` for `<SUPABASE_URL>/auth/v1`.
     Fora disso, 401. A API nunca pergunta ao Supabase se o token vale
     (sem `getUser`): a decisão é pela chave pública.
@@ -162,9 +174,9 @@ D-01, D-02, D-04, D-07 e D-08. Cada uma tem alternativa defensável.
 Back: Jest e supertest. A JWKS é servida por um servidor local do
 teste, com chave gerada no teste. Nunca o Supabase.
 - CA-01 Rota protegida sem token responde 401.
-- CA-02 Token assinado por outra chave com o mesmo `kid`, expirado, com
-  `aud` diferente de `authenticated` ou com `iss` de outro projeto
-  responde 401.
+- CA-02 Token assinado por outra chave com o mesmo `kid` (de curva
+  elíptica ou RSA), expirado, com `aud` diferente de `authenticated`, com
+  `iss` de outro projeto ou com carga que não é JSON responde 401.
 - CA-03 Token HS256, com `alg: none` ou com `kid` que não está na JWKS
   responde 401, sem nenhuma chamada ao endpoint `/user` do Auth.
 - CA-04 Token válido sem `app_metadata.tenant_id` (mesmo com um
@@ -191,8 +203,8 @@ Front: Playwright. Auth do Supabase e API interceptados.
 - CA-12 E-mail em formato inválido ou senha vazia mostram mensagem no
   campo e não chamam o Auth.
 - CA-13 `/app` sem sessão leva a `/entrar`.
-- CA-14 "Sair" encerra a sessão e leva a `/entrar`; abrir `/app` depois
-  leva a `/entrar`.
+- CA-14 "Sair" encerra a sessão deste aparelho (escopo `local`) e leva a
+  `/entrar`; abrir `/app` depois leva a `/entrar`.
 - CA-15 A chamada à API leva `Authorization: Bearer <access token da
   sessão>`.
 - CA-16 Com a API respondendo 403 em `/v1/eu`, a área logada mostra a
