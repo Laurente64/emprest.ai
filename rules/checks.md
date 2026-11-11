@@ -29,11 +29,16 @@ Sempre que você for dizer "pronto", "implementado" ou "funcionando".
    O teste que prova um CA cita o ID no nome, por exemplo
    `it('CA-01 responde 200')`. Comentário não conta.
 
+6. Se for dizer que uma SPEC está pronta (não só uma tarefa): a última
+   rodada salva em vibing/docs/specs/<NNN>/verificacoes/ precisa ter
+   "Veredito: PRONTA" (AGENTS.md, passo 4). Sem ela, a spec não está
+   pronta, mesmo com todas as tarefas feitas.
+
 ## Verificação
 Pronto = testes e build terminaram sem falha, a migration aplicada (se
 houve) é a aprovada, E o git status não trouxe surpresa. Tudo isso, não
 parte. Tarefa sem teste ou sem build rodado não está pronta: está "não
-testada".
+testada". Spec pronta = isso E a rodada do verificador com PRONTA.
 
 ## Não faça
 - Não relate sucesso parcial. Teste vermelho é tarefa não terminada,

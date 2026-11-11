@@ -127,7 +127,10 @@ e passe as entradas que ele pede. O prompt é só isso: não copie nem
 resuma o arquivo, nem acrescente lembretes ou pistas do que procurar.
 
 - No passo 4 da ordem abaixo, ou quando eu pedir verificação, conferência
-  de CA ou revisão contra a spec: agents/verificador-spec.md.
+  de CA ou revisão contra a spec: agents/verificador-spec.md. As
+  entradas são o caminho da spec e, para cada repositório afetado, a
+  branch e o intervalo de commits. Deixe cada repositório na branch
+  informada antes de disparar.
 
 Ordem de uma funcionalidade:
 1. Rascunhe a spec em vibing/docs/specs/<NNN-funcionalidade>/, a partir
@@ -136,6 +139,10 @@ Ordem de uma funcionalidade:
 2. Escreva o plano e as tarefas. PARE até eu aprovar.
 3. Execute UMA tarefa, rode os checks, mostre o resultado e PARE.
 4. Depois da última tarefa, antes de declarar a spec pronta, delegue a
-   verificação a agents/verificador-spec.md. A spec só está pronta com
-   "Veredito: PRONTA". Qualquer outro resultado volta para as tarefas, e
-   quem corrige é o agente principal, nunca o verificador.
+   verificação a agents/verificador-spec.md. Salve a resposta dele, sem
+   editar nada, em vibing/docs/specs/<NNN>/verificacoes/AAAA-MM-DD-rodada-N.md:
+   uma rodada por arquivo, nunca sobrescreva a anterior. A spec só está
+   pronta com "Veredito: PRONTA" na última rodada salva. Qualquer outro
+   resultado volta para as tarefas, e quem corrige é o agente principal,
+   nunca o verificador, nem quando a única falha for um teste quebrado.
+   Depois da correção, uma rodada nova.
