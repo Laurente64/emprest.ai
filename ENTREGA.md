@@ -12,7 +12,7 @@ código dizem `back` ou `front`.
 - Repositório de documentação e decisões: https://github.com/Laurente64/emprest.ai
 - API (back): https://github.com/Laurente64/emprest.ai-back
 - SPA (front): https://github.com/Laurente64/emprest.ai-front
-- Produção (Vercel): API — https://emprest-ai-back-sigma.vercel.app · front — endereço do projeto front na Vercel (preencher antes da tag)
+- Produção (Vercel): API — https://emprest-ai-back-sigma.vercel.app · front — https://emprest-ai-front-eta.vercel.app
 
 ## Quem fez o quê nesta entrega
 Fui eu (aluno) quem respondeu às perguntas de negócio e de conflito. O
@@ -40,7 +40,7 @@ cada spec, e eu as confiro antes da tag.
 | Briefing de empréstimo: "14 dias úteis" | PRD e spec 003 (P-06): 14 dias | 14 dias corridos | Mesmo motivo; e "úteis" não diz quais feriados | 006 C-02 | be36206 |
 | Briefing de empréstimo, item 9: catálogo "sem rodapé nem texto de crédito" | Contrato da skill e regra da API de imagens (mostrar a origem) | Crédito "Fotos: Pixabay" mantido, discreto | Exigência da fonte da imagem vale mais que preferência visual | 006 C-03, item 14, CA-20 | be36206 |
 | Briefing de dados: "deixe a senha escrita no próprio arquivo" | Regra da prática e rules/secrets.md | Senha em `SEED_PROFESSOR_SENHA` (`back/.env`, fora do git) | Senha no git não sai mais do histórico | 005 C-02; CA-07; `git log -S` vazio nos três repositórios (005/tarefas.md, T4) | back 4eafb0e |
-| Briefing de dados: "instale a biblioteca sharp" | rules/restrictions.md e ADR-001 (biblioteca fora do ADR) | Eu aprovei; o ADR-001 ganhou o §12 (devDependency, só no script) | 800×600 precisa ser garantido por código | adr/001-stack.md §12 | 5ca5c67 |
+| Briefing de dados: "instale a biblioteca sharp" | rules/restrictions.md e ADR-001 (biblioteca fora do ADR) | Eu aprovei; o a decisão virou o ADR-003 (devDependency, só no script) | 800×600 precisa ser garantido por código | adr/003-processamento-de-imagens.md | 5ca5c67 |
 | Briefing de dados: "TI-0004 e TI-0007 em manutenção; os outros 10" | A lista do próprio enunciado ("use exatamente esta") marca também TI-0010 | Vale a lista: 3 em manutenção, 9 disponíveis | O item 1 do briefing aponta para a lista | 005 C-01; CA-03 | be36206 |
 | Contrato da skill: "só a API do Pexels" | O Pexels não funcionou para mim | Pixabay, com crédito "Fotos: Pixabay" | Mesma garantia (fonte única, licença, crédito) com outro provedor | 005 C-04; skills/imagens-equipamentos/SKILL.md | 710fc5a |
 | Tech lead: "o verificador pode corrigir o teste quebrado" | Requisito "Independência" do enunciado; AGENTS.md, passo 4 | Recusado | Quem verifica e corrige perde o olhar independente; teste quebrado é REPROVADO e volta | agents/verificador-spec.md, "Proibições"; AGENTS.md passo 4 | 608cc80 |
@@ -94,11 +94,13 @@ cada spec, e eu as confiro antes da tag.
   ficaram como proposta (seção 7), para eu decidir.
 
 ## 3. Uma decisão que merece (ou não) um ADR
-**sharp virou ADR (ADR-001 §12).** Biblioteca fora do ADR é proibida por
-rules/restrictions.md; a única forma de permitir é mudar o ADR, e a
-decisão (ferramenta de máquina, fora do bundle) vale para qualquer
-script futuro. Alternativas no próprio ADR: Pillow, tamanho pela URL do
-provedor.
+**sharp virou ADR (ADR-003).** Biblioteca fora do ADR é proibida por
+rules/restrictions.md, e a decisão (ferramenta de máquina, fora do
+bundle) vale para qualquer script futuro. O agente primeiro a escreveu
+como §12 dentro do ADR-001. Isso foi desfeito: ADR aceito não se edita,
+escreve-se o próximo. O ADR-001 voltou a ser o de antes da prática, e a
+decisão é o ADR-003, com as alternativas (Pillow, tamanho pela URL do
+provedor).
 
 **Tenant no `app_metadata` não virou ADR, e deveria quando houver o
 segundo tenant.** Ela interpreta o ADR-001 §6 ("claim do JWT") de um jeito
@@ -196,6 +198,12 @@ Propostas que ficaram para mim (o harness bloqueou a edição pelo agente):
 - **Rate limit, helmet, pino, Sentry e CI** (ADR-001 §9 e §10): fora,
   sem spec. O `POST /v1/emprestimos` não tem limite por pessoa além das
   regras de negócio.
+- **Commits sem rodada do verificador:** a correção do build (back
+  e3addb6) e a da foto de "Meus empréstimos" (front 62d9bc4) vieram
+  depois da última rodada PRONTA da 006 (006/tarefas.md).
+- **AGENTS.md, "Estado atual" e "Comandos":** ainda descrevem o projeto
+  de antes da prática. O harness bloqueou a edição pelo agente; a
+  atualização é minha.
 - **Testes da landing (spec 001, CA-02 a CA-08)** citam o CA só em
   comentário, o que rules/checks.md não aceita.
 - **Região do Supabase** (us-west-2 no projeto, sa-east-1 no ADR-001 §9):

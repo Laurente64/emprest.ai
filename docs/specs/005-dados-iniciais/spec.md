@@ -94,7 +94,7 @@ usuário. Popular de novo não duplica nada.
   vibing/rules/secrets.md. A senha fica em variável de ambiente
   (`back/.env`, fora do git; `.env.example` sem valor).
 - C-03 sharp: o briefing manda instalar; não estava no ADR-001. O
-  usuário aprovou, e o ADR-001 ganhou o §12 (dependência de
+  usuário aprovou, e o a decisão virou o ADR-003 (dependência de
   desenvolvimento, só no script de imagens).
 - C-04 Fonte das fotos: o contrato da skill diz "só a API do Pexels"; o
   usuário decidiu usar o Pixabay. O crédito na tela passa a ser "Fotos:
