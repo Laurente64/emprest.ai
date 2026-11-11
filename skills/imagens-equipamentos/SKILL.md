@@ -18,7 +18,7 @@ back/prisma/dados/imagens/: os arquivos `.jpg`, o `creditos.json` e o
 
 | requisito | garantido por | como |
 |---|---|---|
-| Fonte única | código e teste | O script só chama `pixabay.com/api/` e só baixa de `cdn.pixabay.com`. Qualquer outro host é recusado (`origemPermitida`). |
+| Fonte única | código e teste | O script só chama `https://pixabay.com/api/` e só baixa de `https://pixabay.com/get/…` (o `largeImageURL`). Qualquer outro host é recusado (`origemPermitida`). |
 | Direito de imagem | código e revisão humana | O código filtra (`safesearch=true`, `image_type=photo`, tags bloqueadas). Filtro de tag não enxerga a foto: a aprovação é humana, registrada no `revisao.json` (references/revisao-visual.md). O envio recusa foto sem aprovação. |
 | 800×600 | código e teste | O `sharp` corta e redimensiona para 800×600 (`fit: cover`). Um teste lê cada arquivo commitado e falha se algum não tiver exatamente 800×600. |
 | Sem repetição | código e teste | A escolha pula foto já usada por outro equipamento. Um teste falha se dois equipamentos tiverem o mesmo id do Pixabay ou o mesmo arquivo (sha256). |

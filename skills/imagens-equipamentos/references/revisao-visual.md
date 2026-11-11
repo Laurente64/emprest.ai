@@ -10,7 +10,7 @@ houver qualquer um destes:
 |---|---|
 | Pessoa | rosto, corpo, mão, braço, reflexo de pessoa na tela |
 | Marca ou logo legível | maçã da Apple, "DELL", "HP", logo do Windows, marca no cabo ou na câmera |
-| Texto legível | teclado com letras nítidas em close não reprova; papel, post-it, embalagem ou adesivo com texto legível reprova |
+| Texto legível | marcação genérica do próprio objeto (letras do teclado, "WEB CAMERA" e abertura na lente) não reprova, e a aprovação registra isso em `observacao`; papel, post-it, embalagem, adesivo ou texto impresso no produto além disso reprova |
 | Tela com conteúdo | site, código, planilha, foto ou papel de parede figurativo na tela. Tela desligada, preta ou de uma cor só passa |
 | Não é o equipamento | a foto não mostra o que o nome diz (um cabo USB no lugar de um HDMI, um tablet no lugar de notebook) |
 
@@ -22,7 +22,7 @@ No `back/prisma/dados/imagens/revisao.json`:
 ```json
 {
   "aprovadas": {
-    "TI-0001": { "pixabayId": 123, "por": "<quem>", "em": "AAAA-MM-DD" }
+    "TI-0001": { "pixabayId": 123, "por": "<quem>", "em": "AAAA-MM-DD", "observacao": "opcional" }
   },
   "reprovadas": [
     { "patrimonio": "TI-0001", "pixabayId": 456, "motivo": "logo legível na tampa", "por": "<quem>", "em": "AAAA-MM-DD" }

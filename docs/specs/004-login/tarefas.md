@@ -67,4 +67,32 @@ o PRD, os ADRs, as rules e o enunciado e devolveu 37 itens. O que mudou:
   produção").
 
 ## Registro
-(preenchido durante a execução)
+- T1 (2026-11-11) — back `spec-004-login` 4ab998c. `npm test` 9 passed;
+  `npm run test:e2e` 4 passed; build e lint sem erro; `openapi:check` em dia.
+- T2 (2026-11-11) — back 24e400b. `npm run test:e2e` 13 passed (CA-01 a
+  CA-09); `npm test` 9 passed; `npm run test:db` 104 passed; build e lint
+  sem erro; `openapi:check` em dia. Achado durante a tarefa: o `getClaims`
+  do `supabase-js` cai no `getUser` pela rede quando o algoritmo é HS ou o
+  `kid` não está na JWKS; por isso a API escolhe a chave antes (item 13).
+- T3 (2026-11-11) — front `spec-004-login` 734c5fd, feita por um subagente
+  (fork do agente principal) só no front/. `npm test` 18 passed (8 da
+  landing e 10 de CA-10 a CA-18); build e lint sem erro; `api:check` em
+  dia. Decisões que a spec não cobria, tomadas na tarefa:
+  - `vercel.json` ganha o rewrite de SPA (`/(.*)` → `/index.html`). Sem
+    ele, abrir `/entrar` ou `/app` direto dá 404 na Vercel; o preview do
+    Vite já faz isso e o teste não pegaria. Teste citando CA-13.
+  - O cliente do Supabase é criado no primeiro uso: sem as variáveis no
+    build, a landing continua abrindo.
+  - Só o 400 do Auth mostra "E-mail ou senha incorretos."; outra falha
+    mostra "Não foi possível entrar agora. Tente de novo."
+  - "Sair" revoga o token no Supabase; depois de um 401 da API, a saída é
+    só local (o servidor já recusou o token).
+  - O TanStack Query não repete 4xx; repete no máximo duas vezes 5xx ou
+    falha de rede.
+  - Falha de `/v1/eu` que não seja 401 nem 403: "Não foi possível carregar
+    os seus dados. Tente de novo." e "Sair".
+  - Título e lead da coluna esquerda do login escritos na tarefa; rodapé
+    "Operações · TI interno" a 55% (ADR-002 §7), não a 40% do layout.md.
+  - Ficou como estava: os testes da landing de CA-02 a CA-08 (spec 001)
+    citam o CA só em comentário, o que o checks.md não aceita; o bundle
+    passou de 500 kB (aviso do Vite, não erro).
