@@ -96,3 +96,18 @@ o PRD, os ADRs, as rules e o enunciado e devolveu 37 itens. O que mudou:
   - Ficou como estava: os testes da landing de CA-02 a CA-08 (spec 001)
     citam o CA só em comentário, o que o checks.md não aceita; o bundle
     passou de 500 kB (aviso do Vite, não erro).
+- T4 (2026-11-11) — verificação.
+  - Rodada 1 (back 24e400b, front 734c5fd): NÃO PRONTA. CA-02: token RS256
+    de chave RSA com o mesmo `kid` voltava 500. Causa: exceção do
+    `getClaims` fora de `TokenInvalidoError`. Correção (agente principal):
+    back b3733ce (exceção da conferência vira 401; `alg` do token igual ao
+    da chave; CA-02 com os dois casos) e front bfe7458 ("Sair" com escopo
+    `local`). A spec foi emendada nos itens que a rodada apontou como fora
+    dela. Achado do agente na mesma correção: os testes unitários só
+    passavam porque o Prisma Client lia o `back/.env`; passaram a carregar
+    o ambiente de teste.
+  - Rodada 2 (back b3733ce, front bfe7458): PRONTA.
+  - Observação da rodada 2, fora dos CAs: o teto de uma busca da JWKS a
+    cada 30 s não vale para requests simultâneos. Corrigido depois, no
+    branch da spec 006 (busca em andamento compartilhada), sem rodada nova
+    da 004 para isso.

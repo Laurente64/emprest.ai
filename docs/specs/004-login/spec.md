@@ -4,6 +4,8 @@ Status: APROVADA em 2026-11-11 pelo agente, por delegação do usuário
 (ver "Aprovação"). As decisões do agente estão em "Para o usuário
 confirmar". Emendada em 2026-11-11 depois da rodada 1 do verificador
 (itens 3, 5, 7, 8 e 13; CA-02 e CA-14): verificacoes/2026-11-11-rodada-1.md.
+PRONTA em 2026-11-11: verificacoes/2026-11-11-rodada-2.md (back b3733ce,
+front bfe7458).
 Origem: PRD v1, item 1 ("Login. Cada pessoa vê os próprios
 empréstimos."). Pré-requisito das specs 005 e 006: o briefing de dados
 iniciais exige que o professor "entra pelo login do sistema". O
