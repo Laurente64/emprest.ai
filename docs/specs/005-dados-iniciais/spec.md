@@ -5,6 +5,7 @@ Status: APROVADA em 2026-11-11 pelo agente, por delegação do usuário
 respondidas por ele em 2026-11-10; as do agente estão em "Para o usuário
 confirmar". Emendada em 2026-11-11 depois da rodada 1 do verificador
 (item 10 e CA-05): verificacoes/2026-11-11-rodada-1.md.
+PRONTA em 2026-11-11: verificacoes/2026-11-11-rodada-2.md (back 4f61505).
 Origem: briefing "dados iniciais" da prática (pedido, não spec) e a
 lista de equipamentos do enunciado. PRD v1, item 2, precisa de
 equipamentos para existir.

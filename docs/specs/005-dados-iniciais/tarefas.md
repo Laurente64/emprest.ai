@@ -96,3 +96,6 @@ de cada tarefa fica registrado no fim.
     pelo seed e conferida no pedido real do `supabase-js`; e-mail do
     briefing escrito no teste; variável vazia conta como ausente (spec
     emendada); testes que executam a recusa do envio.
+  - Rodada 2 (back 4f61505): PRONTA. Observação informativa: o
+    `npm run lint` não cobre `scripts/` nem `prisma/` (68 erros de
+    formatação e 2 de `no-base-to-string`); tratado no branch da 006.
