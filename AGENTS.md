@@ -119,6 +119,9 @@ com qualquer regra (rules/restrictions.md).
 
 - Antes de escrever, alterar ou revisar arquivo .ts ou .tsx em back/ ou
   front/: skills/typescript/SKILL.md.
+- Antes de preparar, trocar, revisar ou publicar foto de equipamento, ou
+  de mexer em back/scripts/imagens/ ou back/prisma/dados/imagens/:
+  skills/imagens-equipamentos/SKILL.md.
 
 Os subagentes estão em vibing/agents/. O Claude Code não os carrega de
 lá, então eles não existem como tipo de agente. Para usar um, dispare um
