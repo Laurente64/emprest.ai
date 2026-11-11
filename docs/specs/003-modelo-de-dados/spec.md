@@ -254,6 +254,12 @@ recupera o passado"). Ver P-08.
   authenticated, USING (false) WITH CHECK (false). Ver P-09.
 
 ### Regras que NÃO ficam no banco
+Nota de 2026-11-11: a spec 006 (C-01), por decisão do usuário, faz o
+pedido nascer `ativo`, sem aprovação nem entrega por Operações, com a
+própria membership nas colunas de decisão e entrega e `autoatendimento`
+na `audit_log`. As transições abaixo continuam valendo para quando a
+aprovação de Operações existir.
+
 Ficam no service das specs de funcionalidade, dentro de transação:
 - Limite de empréstimos em andamento por pessoa: `max_open_loans` da
   membership, ou 3 se for nulo. Conta todo empréstimo em andamento,
@@ -276,6 +282,9 @@ contar os empréstimos em andamento, e que o índice único parcial de
 detalhe é do plano da spec de "solicitar empréstimo", não desta.
 
 ## Seed
+Nota de 2026-11-11: a spec 005 muda esta seção. O seed passa a criar os
+12 equipamentos da prática e as contas do professor e de teste.
+
 `prisma/seed.ts`, idempotente, cria o tenant `suporte_ti` (ADR-001
 §5), com o nome "Suporte TI". Não cria usuário nem equipamento. Ver
 P-10.

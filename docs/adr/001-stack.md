@@ -244,6 +244,23 @@
 
 ---
 
+## 12. Scripts de dados
+
+Incluído em 2026-11-11. Decisão do usuário em 2026-11-10; texto
+redigido pelo agente. Origem: briefing de dados iniciais da prática,
+que pedia "instale a biblioteca sharp", e o contrato da skill
+imagens-equipamentos (todas as imagens em 800×600, garantido).
+
+| Item | Escolha |
+|---|---|
+| Processamento de imagem | `sharp`, dependência de desenvolvimento do back/, versão fixa |
+| Onde roda | Só nos scripts de back/scripts/imagens/, na máquina de quem prepara as fotos |
+
+- **Processamento de imagem** — "todas em 800×600" precisa ser garantido por código e conferido por teste; pedir o tamanho à API de imagens não garante, e redimensionar à mão não se repete igual.
+- **Onde roda** — fora do bundle da API: a function da Vercel não carrega binário nativo que ninguém usa em runtime.
+
+---
+
 ## Alternativas descartadas
 
 | Alternativa | Motivo do descarte |
@@ -272,6 +289,8 @@
 | Biblioteca de componentes fechada (MUI, Mantine) | O design vem do Figma e precisaria ser imposto por cima do visual da biblioteca |
 | Next.js | Não preciso de SSR; teria dois backends no mesmo projeto |
 | VPS ou container (Fly, ECS) para a API | Resolveria região, worker, WebSocket e uso justo, mas contraria a decisão de hospedagem |
+| Redimensionar com Python (Pillow) ou ferramenta do sistema | Linguagem e instalação fora da stack; o script deixaria de rodar em quem só tem Node |
+| Pedir o tamanho pela URL da API de imagens | Depende do provedor (o Pixabay não corta em 800×600) e não é conferível por teste |
 
 ---
 

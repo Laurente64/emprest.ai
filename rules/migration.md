@@ -21,8 +21,10 @@ parecer trivial.
    e PARE. Eu aprovo ou corrijo.
 2. Gere a migration com o Prisma Migrate, em back/prisma/migrations/.
    Uma migration por tarefa. RLS, policies e triggers entram como SQL
-   bruto dentro dessa mesma migration (ADR-001 §5). O comando de geração
-   ainda não foi verificado nesta máquina: diga qual vai usar e espere.
+   bruto dentro dessa mesma migration (ADR-001 §5). O único comando de
+   geração já rodado é o da primeira migration (Comandos, no AGENTS.md),
+   e ele parte do banco vazio: para a próxima, diga qual vai usar e
+   espere.
 3. Toda tabela de domínio nasce com a coluna tenant_id (ADR-001 §6).
 4. Toda tabela nova nasce com Row Level Security habilitada e pelo
    menos uma policy explícita na mesma migration. Tabela sem policy
