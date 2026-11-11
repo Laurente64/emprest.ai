@@ -65,3 +65,11 @@ de cada tarefa fica registrado no fim.
     conferia a categoria. CA-04: "não grava nada" não olhava a
     `audit_log`. Correção (agente principal), back 241a7ce; o CA-09 ganhou
     o caso `emAtraso` verdadeiro.
+  - Prova com erro plantado (enunciado, Entrega 1, "Provado"): back
+    7bcb40a muda o limite padrão de 3 para 5, o número do briefing que o
+    PRD recusa. O verificador recebeu as mesmas entradas de sempre, sem
+    pista. Rodada 2 (back 7bcb40a, front 30dfcb0): NÃO PRONTA, com CA-06,
+    CA-08 e CA-11 REPROVADOS pela causa certa e os demais ATENDIDOS,
+    inclusive as correções da rodada 1. A mensagem do commit diz que é
+    erro plantado; a reprovação veio dos testes vermelhos, não da
+    mensagem. Desfeito em back 9ec9d0e (git revert).
