@@ -114,6 +114,26 @@ aparece na tela.
 16. A CSP do `vercel.json` libera, em `img-src`, exatamente a origem do
     projeto Supabase. Sem isso o navegador não carrega as fotos na
     Vercel, e o Playwright no preview não percebe.
+17. Detalhes de tela decididos na execução (emenda de 2026-11-11):
+    - linha de detalhe do card: "Pronto para retirada no balcão"
+      (disponível), "Emprestado no momento" (com outra pessoa), "Devolver
+      até DD/MM/AAAA" (com a própria pessoa, do `devolverAte` dela) e "Em
+      manutenção";
+    - diálogo: título "Solicitar empréstimo", texto "O empréstimo é
+      registrado na hora. Retire o item no balcão de Operações.", resumo
+      com Equipamento e Devolver até, botões "Cancelar" e "Confirmar";
+      clicar fora fecha; falha que não vem da API: "Não foi possível
+      registrar o pedido. Tente de novo.";
+    - falha ao carregar: "Não foi possível carregar o catálogo. Tente de
+      novo." e "Não foi possível carregar os seus empréstimos. Tente de
+      novo.";
+    - os dois avisos do item 13 podem aparecer juntos, atraso primeiro; o
+      atalho é "Ver meus empréstimos";
+    - o crédito fica abaixo da grade e abre em nova aba;
+    - item sem `imagemUrl` mostra o espaço da foto com "Sem foto";
+    - a tela do catálogo também busca "meus empréstimos", para limite,
+      atraso e a data dos itens com a pessoa; a barra de 3 traços do
+      layout.md §5.3 não entra.
 
 ## Conflitos com o que foi pedido (decisões do usuário, 2026-11-10)
 - C-01 Fluxo: o briefing diz "solicitar cria o empréstimo na hora, sem
